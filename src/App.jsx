@@ -8,7 +8,7 @@ import{Hero,
   Subscribe,
   Footer} from "./sections";
 
-  import Nav from "./components/nav";
+  import Nav from "./components/Nav";
 
 
 const App = () => (
