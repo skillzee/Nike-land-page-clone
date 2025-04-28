@@ -47,15 +47,18 @@ pipeline {
         }
         
         stage('Push to Docker Hub') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("${IMAGE_NAME}:${env.BUILD_ID}").push()
-                        docker.image("${IMAGE_NAME}:latest").push()
-                    }
+    steps {
+        script {
+            // Use default context instead of desktop-linux
+            withEnv(['DOCKER_CONTEXT=default']) {
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    docker.image("${IMAGE_NAME}:${env.BUILD_ID}").push()
+                    docker.image("${IMAGE_NAME}:latest").push()
                 }
             }
         }
+    }
+}
         
         stage('Deploy') {
             steps {
