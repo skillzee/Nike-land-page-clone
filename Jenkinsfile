@@ -15,19 +15,19 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
         
         stage('Run Tests') {
             steps {
-                sh 'npm test' // Make sure you have tests set up
+                bat 'npm test' // Make sure you have tests set up
             }
         }
         
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
         
@@ -52,7 +52,7 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sh 'docker-compose down && docker-compose up -d'
+                bat 'docker-compose down && docker-compose up -d'
             }
         }
     }
